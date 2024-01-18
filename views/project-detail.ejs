@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Detail - <%= project.name %></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .filters {
+            margin-top: 20px;
+        }
+
+        .filter-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .filter-list li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1><%= project.name %> - Project Detail</h1>
+        <p>Description: <%= project.description %></p>
+        <p>Author: <%= project.author %></p>
+
+        <h2>Project Issues</h2>
+
+        <div class="filters">
+            <h3></h3>
+            <ul class="filter-list">
+                <li>
+                    <label for="filterBy">Filter By:</label>
+                    <select id="filterBy">
+                        <option value="author">Author</option>
+                        <option value="title">Title</option>
+                        <option value="description">Description</option>
+                    </select>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="mb-3">
+            <label>Existing Labels:</label>
+            <ul class="list-inline">
+                <% project.labels.forEach(label => { %>
+                <li class="list-inline-item"><%= label %></li>
+                <% }); %>
+            </ul>
+        </div>
+
+        <ul class="issue-list">
+            <% issues.forEach(issue => { %>
+            <li class="issue-item">
+                <strong><%= issue.title %></strong><br>
+                <%= issue.description %><br>
+                Labels: <%= issue.labels %><br>
+                Author: <%= issue.author %>
+            </li>
+            <% }); %>
+        </ul>
+
+        <a href="/create-issue?projectId=<%= project.id %>" class="btn btn-success">Create Issue</a>
+        <a href="/" class="btn btn-secondary mt-3">Back to Home</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
